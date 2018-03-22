@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 public class BindingsExecutionTest {
     private File resourcesDirectory = new File("src/test/resources/bindings");
-
+    final String clearexit = "\\s+quit\\s*\\(\\)\\s*;|\\s+exit\\s*\\(\\)\\s*;";
     private DelightedBindings bindings;
     private NashornSandbox sandbox;
     private String functionTest;
@@ -25,38 +25,34 @@ public class BindingsExecutionTest {
                         new InputStreamReader(
                                 new FileInputStream(test1)))
                         .lines()
-                        .collect(Collectors.toList()));
-
+                        .collect(Collectors.toList()))
+                .replaceAll(clearexit, "");
     }
 
     @Before
-    public void beforeEach() {
+    public void beforeEach() throws ScriptException {
         sandbox = NashornSandboxes.create();
         sandbox.allowExitFunctions(false);
+        sandbox.allowNoBraces(false);
+        sandbox.allowGlobalsObjects(false);
         bindings = new DelightedBindings(sandbox.createBindings());
+        sandbox.eval(functionTest, bindings);
+
     }
 
     @Test
-    public void executeFunction() throws ScriptException, NotScriptedException {
-        sandbox.eval(functionTest, bindings);
+    public void executeFunction() throws NotScriptedException {
         assertEquals(3.0, bindings.execute("singleLevel", 1, 2));
     }
 
     @Test
-    public void DisabledExit() throws ScriptException, NotScriptedException {
-        sandbox.eval(functionTest, bindings);
+    public void RemovedExit() throws NotScriptedException {
         assertEquals(3.0, bindings.execute("singleLevel", 1, 2));
     }
+
     @Test
-    public void DisabledExitCalled() throws ScriptException, NotScriptedException {
-        sandbox.eval(functionTest, bindings);
-        try{
-            bindings.execute("callsExit");
-        }catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-        //assertEquals(3.0, bindings.execute("singleLevel", 1, 2));
+    public void RemovedExitCalled() throws  NotScriptedException {
+        bindings.execute("callsExit");
     }
 
 
