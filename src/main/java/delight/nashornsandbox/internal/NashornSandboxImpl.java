@@ -9,8 +9,6 @@ import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import delight.nashornsandbox.NashornSandbox;
 import delight.nashornsandbox.exceptions.ScriptCPUAbuseException;
@@ -35,7 +33,7 @@ import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 @SuppressWarnings("restriction")
 public class NashornSandboxImpl implements NashornSandbox {
 
-	static final Logger LOG = LoggerFactory.getLogger(NashornSandbox.class);
+	//static final Logger LOG = LoggerFactory.getLogger(NashornSandbox.class);
 
 	protected final SandboxClassFilter sandboxClassFilter;
 
@@ -91,7 +89,6 @@ public class NashornSandboxImpl implements NashornSandbox {
 			final StringBuilder sb = new StringBuilder();
 			Bindings bindings = scriptEngine.getBindings(ScriptContext.ENGINE_SCOPE);
 			if (!allowExitFunctions) {
-				
 				bindings.remove("quit");
 				bindings.remove("exit");
 				sb.append("var quit=function(){};var exit=function(){};");
