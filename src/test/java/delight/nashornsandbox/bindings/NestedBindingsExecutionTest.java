@@ -1,13 +1,10 @@
-package bindings;
+package delight.nashornsandbox.bindings;
 
 import delight.nashornsandbox.NashornSandbox;
 import delight.nashornsandbox.NashornSandboxes;
-import jdk.nashorn.api.scripting.NashornScriptEngine;
-import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import java.io.*;
 import java.util.stream.Collectors;
@@ -16,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 public class NestedBindingsExecutionTest {
     private final String classTest;
-    private File resourcesDirectory = new File("src/test/resources/bindings");
+    private File resourcesDirectory = new File("src/test/resources/delight.nashornsandbox.bindings");
 
     private DelightedBindings bindings;
     private NashornSandbox sandbox;

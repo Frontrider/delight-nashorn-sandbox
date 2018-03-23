@@ -1,4 +1,4 @@
-package bindings;
+package delight.nashornsandbox.bindings;
 
 import delight.nashornsandbox.NashornSandbox;
 import delight.nashornsandbox.NashornSandboxes;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.assertEquals;
 
 public class BindingsExecutionTest {
-    private File resourcesDirectory = new File("src/test/resources/bindings");
+    private File resourcesDirectory = new File("src/test/resources/delight.nashornsandbox.bindings");
     final String clearexit = "\\s+quit\\s*\\(\\)\\s*;|\\s+exit\\s*\\(\\)\\s*;";
     private DelightedBindings bindings;
     private NashornSandbox sandbox;
@@ -37,7 +37,6 @@ public class BindingsExecutionTest {
         sandbox.allowGlobalsObjects(false);
         bindings = new DelightedBindings(sandbox.createBindings());
         sandbox.eval(functionTest, bindings);
-
     }
 
     @Test

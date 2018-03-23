@@ -263,7 +263,7 @@ public interface NashornSandbox {
   void setMaxPreparedStatements(int max);
   
   /**
-   * Create new bindings used to replace the state of the current script engine
+   * Create new delight.nashornsandbox.bindings used to replace the state of the current script engine
    * <p>
    * 	This can be typically used to override ECMAScript "global" properties
    * </p>

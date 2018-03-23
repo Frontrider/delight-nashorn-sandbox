@@ -29,7 +29,7 @@ public class TestEvalWithScriptContextWithNewBindings {
 		final NashornSandbox sandbox = NashornSandboxes.create();
 		ScriptContext newContext = new SimpleScriptContext();
 		Bindings newBinding = newContext.getBindings(ScriptContext.ENGINE_SCOPE);
-		// This will not be updated by using existing bindings, since Date is a 
+		// This will not be updated by using existing delight.nashornsandbox.bindings, since Date is a
 		// ECMAScript "global" properties and it is being in ENGINE_SCOPE
 		newBinding.put("Date", "2112018");
 
