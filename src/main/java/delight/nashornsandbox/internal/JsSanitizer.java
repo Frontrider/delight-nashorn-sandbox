@@ -32,7 +32,7 @@ import jdk.nashorn.api.scripting.ScriptObjectMirror;
  * @version $Id$
  */
 @SuppressWarnings("restriction")
-class JsSanitizer {
+public class JsSanitizer {
 	private static class PoisonPil {
 		Pattern pattern;
 		String replacement;
@@ -110,7 +110,7 @@ class JsSanitizer {
 	/** <code>true</code> when lack of braces is allowed. */
 	private final boolean allowNoBraces;
 
-	JsSanitizer(final ScriptEngine scriptEngine, final int maxPreparedStatements, final boolean allowBraces) {
+	public JsSanitizer(final ScriptEngine scriptEngine, final int maxPreparedStatements, final boolean allowBraces) {
 		this.scriptEngine = scriptEngine;
 		this.allowNoBraces = allowBraces;
 		this.securedJsCache = createSecuredJsCache(maxPreparedStatements);
@@ -213,7 +213,7 @@ class JsSanitizer {
 		}
 	}
 
-	String secureJs(final String js) throws ScriptException {
+	public String secureJs(final String js) throws ScriptException {
 		String securedJs = null;
 		if (securedJsCache != null) {
 			securedJs = securedJsCache.get(js);

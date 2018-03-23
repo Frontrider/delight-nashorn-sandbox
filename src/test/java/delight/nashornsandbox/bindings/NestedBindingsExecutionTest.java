@@ -31,7 +31,6 @@ public class NestedBindingsExecutionTest {
     @Before
     public void beforeEach() {
         sandbox = NashornSandboxes.create();
-        bindings = new DelightedBindings(sandbox.createBindings());
     }
 
     @Test

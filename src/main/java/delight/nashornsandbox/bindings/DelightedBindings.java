@@ -12,9 +12,12 @@ import java.util.function.Function;
 
 public class DelightedBindings implements Bindings {
 
+    private final String script;
+
     private final Bindings parentBindings;
 
-    public DelightedBindings(Bindings parentBindings) {
+    DelightedBindings(String script, Bindings parentBindings) {
+        this.script = script;
         this.parentBindings = parentBindings;
     }
 
@@ -166,5 +169,9 @@ public class DelightedBindings implements Bindings {
             }
         } else
             throw new NotScriptedException(path[0] + " on path " + originalPath + " is nor scripted!");
+    }
+
+    public String getScript() {
+        return script;
     }
 }

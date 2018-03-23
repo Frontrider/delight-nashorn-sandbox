@@ -1,7 +1,5 @@
 package delight.nashornsandbox.bindings;
 
-import delight.nashornsandbox.NashornSandbox;
-import delight.nashornsandbox.NashornSandboxes;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,31 +10,25 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.assertEquals;
 
 public class BindingsExecutionTest {
-    private File resourcesDirectory = new File("src/test/resources/delight.nashornsandbox.bindings");
-    final String clearexit = "\\s+quit\\s*\\(\\)\\s*;|\\s+exit\\s*\\(\\)\\s*;";
     private DelightedBindings bindings;
-    private NashornSandbox sandbox;
     private String functionTest;
 
     public BindingsExecutionTest() throws FileNotFoundException {
+        File resourcesDirectory = new File("src/test/resources/delight/nashornsandbox/bindings");
         File test1 = new File(resourcesDirectory.getAbsolutePath() + "/delightedBindingExecutionTest.js");
         functionTest = String.join("\n",
                 new BufferedReader(
                         new InputStreamReader(
                                 new FileInputStream(test1)))
                         .lines()
-                        .collect(Collectors.toList()))
-                .replaceAll(clearexit, "");
+                        .collect(Collectors.toList()));
     }
 
     @Before
     public void beforeEach() throws ScriptException {
-        sandbox = NashornSandboxes.create();
-        sandbox.allowExitFunctions(false);
-        sandbox.allowNoBraces(false);
-        sandbox.allowGlobalsObjects(false);
-        bindings = new DelightedBindings(sandbox.createBindings());
-        sandbox.eval(functionTest, bindings);
+        bindings = new DelightedBindingFactory(false,100)
+                .removeExit()
+                .build(functionTest);
     }
 
     @Test
