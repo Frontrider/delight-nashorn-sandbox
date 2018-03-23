@@ -17,22 +17,22 @@ public class DelightedBindingFactory {
     }
 
     DelightedBindingFactory removeExit() {
-        addedScript += "var quit=function(){};var exit=function(){};";
+        addedScript += "function quit(){};function exit(){};";
         return this;
     }
 
     DelightedBindingFactory removeWrite() {
-        addedScript += "var readFully=function(){};var readLine=function(){};";
+        addedScript += "function readFully(){};function readLine(){};";
         return this;
     }
 
     DelightedBindingFactory removeLoad() {
-        addedScript += "var load=function(){};var loadWithNewGlobal=function(){};";
+        addedScript += "function load(){};function loadWithNewGlobal(){};";
         return this;
     }
 
     DelightedBindingFactory removePrint() {
-        addedScript += "var print=function(){};var echo = function(){};";
+        addedScript += "function print(){};function echo(){};";
         return this;
     }
 
